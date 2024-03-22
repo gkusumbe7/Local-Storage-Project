@@ -6,13 +6,37 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <main class="flex justify-center mt-20">
-        <div class="flex flex-col items-center">
+<body class="bg-yellow-200">
+    <main class="flex justify-center ">
+        <div class="flex flex-col mt-20 items-center bg-pink-200 border  border-pink-500 shadow-xl p-5">
             <p class="font-bold text-3xl">Auto Save Textarea</p> <br>
-            <textarea name="textarea" id="textareaInput" cols="40" rows="10" class="border border-black p-5"></textarea>
-          </div>
+            <textarea name="textarea" id="textareaInput" cols="60" rows="10" class="border border-black p-3 text-gray-700 font-semibold text-xl"></textarea>
+            <br>
+            <button id="clearBtn" class="font-semibold hover:bg-yellow-500 rounded-xl text-xl border border-black w-20">Clear</button>
+        </div>
     </main>
+    <script>
+        let textareaInputEle = document.getElementById("textareaInput");
+        // console.log(textareaInputEle);
+
+        textareaInputEle.innerText = localStorage.getItem("userEnterText")
+        // console.log(textareaInputEle);
+        // textareaInputEle.value = localStorage.getItem('content');
+        textareaInputEle.addEventListener("input",(e)=>{
+            localStorage.setItem("userEnterText", e.target.value);
+            textareaInputEle.innerText = localStorage.getItem("userEnterText");
+        })
+
+        let clearBtn = document.getElementById("clearBtn");
+        clearBtn.addEventListener("click", ()=>{
+           if (confirm("Are you sure to Clear All?")) {
+               localStorage.clear();
+                textareaInputEle.innerHTML = "";
+           }
+        });
         
+    </script>
+
+    </script>
 </body>
 </html>
